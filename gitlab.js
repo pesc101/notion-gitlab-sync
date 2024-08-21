@@ -132,7 +132,7 @@ function getPropertiesFromIssue(issue) {
       checkbox: issue.state == "opened",
     },
     title: {
-      title: [{ type: "text", text: { content: issue.title } }],
+      title: [{ type: "text", text: { content: "G4KMU: " + issue.title } }],
     },
     notes: {
       rich_text: [
@@ -173,11 +173,6 @@ function getPropertiesFromIssue(issue) {
         },
       ],
     },
-    timespan: {
-      date: {
-        start: issue.created_at,
-      },
-    },
     last_updated_at: {
       date: {
         start: issue.updated_at,
@@ -190,11 +185,6 @@ function getPropertiesFromIssue(issue) {
       multi_select: issue.labels.map(l => ({ name: l })),
     },
   };
-
-  // Only set the timespan end date if the issue was closed
-  if (issue.closed_at != null) {
-    props.timespan.date.end = issue.closed_at;
-  }
 
   return props;
 }
