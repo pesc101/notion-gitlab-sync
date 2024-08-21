@@ -37,7 +37,11 @@ async function getGitLabIssuesForRepository() {
       }
     );
     let data = await response.json();
-    issues.push(...data);
+    // Filter out only issues assigned to "Jan Strich"
+    let filteredData = data.filter(issue =>
+      issue.assignees.some(assignee => assignee.name === "Jan Strich")
+    );
+    issues.push(...filteredData);
 
     lastPageSize = data.length;
     page++;

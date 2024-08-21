@@ -18,6 +18,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const _ = require("lodash");
+const fs = require("fs");
 const {
   getGitLabIssuesForRepository,
   getGitLabLabelsForProject,
@@ -54,6 +55,8 @@ async function setInitialGitLabToNotionIdMap() {
 }
 
 async function syncNotionDatabaseWithGitLab() {
+  // Write a logging message with timestamp to a log file
+  console.log(`${new Date().toISOString()}\n`);
   // Get all issues currently in the provided GitLab repository.
   console.log("\nFetching issues from GitLab repository...");
   const issues = await getGitLabIssuesForRepository();
