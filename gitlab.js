@@ -134,6 +134,25 @@ function getPropertiesFromIssue(issue) {
     title: {
       title: [{ type: "text", text: { content: issue.title } }],
     },
+    notes: {
+      rich_text: [
+        {
+          type: "text",
+          text: {
+            content: issue.description,
+            link: null,
+          },
+          annotations: {
+            bold: false,
+            italic: false,
+            strikethrough: false,
+            underline: false,
+            code: false,
+            color: "default",
+          },
+        },
+      ],
+    },
 
     assignees: {
       rich_text: [
@@ -164,12 +183,11 @@ function getPropertiesFromIssue(issue) {
         start: issue.updated_at,
       },
     },
+    type_of_work: {
+      multi_select: [{ name: "Programming" }],
+    },
     tags: {
       multi_select: issue.labels.map(l => ({ name: l })),
-    },
-    milestones: {
-      multi_select:
-        issue.milestone == null ? [] : [{ name: issue.milestone.title }],
     },
   };
 
