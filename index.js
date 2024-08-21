@@ -115,7 +115,7 @@ async function getIssuesFromNotionDatabase() {
   for (const page of pages) {
     issues.push({
       pageId: page.id,
-      issueNumber: page.properties.id.rich_text[0].plain_text.slice(1),
+      issueNumber: page.properties.id.rich_text[0]?.plain_text?.slice(1) || ''
     });
   }
 
@@ -163,6 +163,10 @@ async function createPages(pagesToCreate) {
         notion.pages.create({
           parent: { database_id: DATABASE_ID },
           properties: getPropertiesFromIssue(issue),
+          icon: {
+            "type": "emoji",
+            "emoji": "👔"
+          },
         })
       )
     );
@@ -185,6 +189,10 @@ async function updatePages(pagesToUpdate) {
         notion.pages.update({
           page_id: pageId,
           properties: getPropertiesFromIssue(issue),
+          icon: {
+            "type": "emoji",
+            "emoji": "👔"
+          },
         })
       )
     );
