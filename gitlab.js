@@ -139,7 +139,7 @@ function getPropertiesFromIssue(issue) {
         {
           type: "text",
           text: {
-            content: issue.description,
+            content: issue.description || "",
             link: null,
           },
           annotations: {
